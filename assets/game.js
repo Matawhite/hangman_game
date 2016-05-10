@@ -5,13 +5,10 @@ var word = dictionary[Math.floor(Math.random() * dictionary.length)];
 
 
 var wordLength = word.length;
-document.getElementById('wordLength').innerHTML = `Length of word is: ${wordLength}`;
 
 var guesses = 10;
 
-var start = document.getElementById('blankWord')
-.innerHTML = "_"
-.repeat(word.length);
+var start = document.getElementById('blankWord').innerHTML = "_".repeat(word.length);
 
 var arrWord = word.split("");
 
@@ -19,10 +16,33 @@ var output = start.split("");
 
 var lettersGuessed = [];
 
+var wins = 0;
+var losses = 0;
+
+//track has 12 seconds of 
+var music = new Audio('assets/music/power_of_love.mp3');
+music.play();
+
+
+//reset function to manage game state.
+function reset(){
+  word = dictionary[Math.floor(Math.random() * dictionary.length)];
+  lettersGuessed = [];
+  start = document.getElementById('blankWord').innerHTML = "_".repeat(word.length);
+  var wordLength = word.length;
+
+  arrWord = word.split("");
+  output = start.split("");
+  guesses = 10;
+}
+
+
+
 document.onkeyup = function(event) {
 
   //get user input
   var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+
   //check the letter has been used yet.
   if(lettersGuessed.includes(userInput) == false){
     //reduce the number of guesses
@@ -40,17 +60,14 @@ document.onkeyup = function(event) {
         }
       }
 
+      //cheat code;
       if(userInput == 7){
         console.log(word);
       }
 
-    //check if user has won the game
-    if(output.includes("_") == false){
-      document.getElementById('win').innerHTML = "<h1>You Won!</h1>"
+    if(guesses === 10){
       document.getElementById("photo").style.opacity = "1.0";
-    }
-
-    if(guesses === 9){
+    }else if (guesses === 9) {
       document.getElementById("photo").style.opacity = "0.9";
     }else if (guesses === 8) {
       document.getElementById("photo").style.opacity = "0.8";
@@ -70,7 +87,22 @@ document.onkeyup = function(event) {
       document.getElementById("photo").style.opacity = "0.1";
     }else if (guesses === 0) {
       document.getElementById("photo").style.opacity = "0.0";
-      document.getElementById("win").innerHTML = "<h1>Sorry, you lost.</h2>"
+      losses ++
+      reset();
+
     }
+    //check if user has won the game
+    if(output.includes("_") == false){
+      wins ++
+      document.getElementById("photo").style.opacity = "1.0";
+      reset();
+    }
+
+    html = `</p>Instructions go here.</p>
+    <p>Word Length: ${wordLength}</p>
+    <p>Wins: ${wins}</p>
+    <p>Losses: ${losses}</p>`;
+
+    document.getElementById('game').innerHTML = html;
   }
 };
