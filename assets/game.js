@@ -1,5 +1,6 @@
 var dictionary = ["doc","skate", "delorean", "dance", "biff",
-                  "marty", "sea", "calvin", "time", "flux"];
+                  "marty", "sea", "calvin", "time", "flux", "future",
+                "back"];
 
 var word = dictionary[Math.floor(Math.random() * dictionary.length)];
 
@@ -19,7 +20,7 @@ var lettersGuessed = [];
 var wins = 0;
 var losses = 0;
 
-//track has 12 seconds of 
+//track has 12 seconds of
 var music = new Audio('assets/music/power_of_love.mp3');
 music.play();
 
@@ -29,15 +30,14 @@ function reset(){
   word = dictionary[Math.floor(Math.random() * dictionary.length)];
   lettersGuessed = [];
   start = document.getElementById('blankWord').innerHTML = "_".repeat(word.length);
-  var wordLength = word.length;
-
+  wordLength = word.length;
   arrWord = word.split("");
   output = start.split("");
   guesses = 10;
 }
 
 
-
+// start game
 document.onkeyup = function(event) {
 
   //get user input
@@ -64,37 +64,37 @@ document.onkeyup = function(event) {
       if(userInput == 7){
         console.log(word);
       }
-
+      var photo = document.getElementById("photo");
     if(guesses === 10){
-      document.getElementById("photo").style.opacity = "1.0";
+      photo.style.opacity = "1.0";
     }else if (guesses === 9) {
-      document.getElementById("photo").style.opacity = "0.9";
+      photo.style.opacity = "0.9";
     }else if (guesses === 8) {
-      document.getElementById("photo").style.opacity = "0.8";
+      photo.style.opacity = "0.8";
     }else if (guesses === 7) {
-      document.getElementById("photo").style.opacity = "0.7";
+      photo.style.opacity = "0.7";
     }else if (guesses === 6) {
-      document.getElementById("photo").style.opacity = "0.6";
+      photo.style.opacity = "0.6";
     }else if (guesses === 5) {
-      document.getElementById("photo").style.opacity = "0.5";
+      photo.style.opacity = "0.5";
     }else if (guesses === 4) {
-      document.getElementById("photo").style.opacity = "0.4";
+      photo.style.opacity = "0.4";
     }else if (guesses === 3) {
-      document.getElementById("photo").style.opacity = "0.3";
+      photo.style.opacity = "0.3";
     }else if (guesses === 2) {
-      document.getElementById("photo").style.opacity = "0.2";
+      photo.style.opacity = "0.2";
     }else if (guesses === 1) {
-      document.getElementById("photo").style.opacity = "0.1";
+      photo.style.opacity = "0.1";
     }else if (guesses === 0) {
-      document.getElementById("photo").style.opacity = "0.0";
-      losses ++
+      photo.style.opacity = "0.0";
+      losses ++;
       reset();
 
     }
     //check if user has won the game
     if(output.includes("_") == false){
-      wins ++
-      document.getElementById("photo").style.opacity = "1.0";
+      wins ++;
+      photo.style.opacity = "1.0";
       reset();
     }
 
