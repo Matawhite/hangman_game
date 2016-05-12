@@ -1,5 +1,46 @@
+@font-face {
+  font-family: "BTTF";
+    src: url(BTTF.ttf) format("truetype");
+}
+
+body{
+  background: url(background.jpg) no-repeat 50% 50% fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+}
+
 #photo {
-    width:500px;
+    width:450px;
     height: auto;
     opacity: 1.0;
+    float: left;
+    margin-left: 200px;
+    padding: 10px;
+}
+
+#instruct {
+  text-align: center;
+}
+
+#scoreboard {
+width: auto;
+padding: 20px;
+font-size: 24px;
+height: 290px;
+font-family: BTTF;
+}
+
+header{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  font-family: BTTF;
+}
+
+header h1{
+  font-weight: bolder;
+  padding-bottom: 5px;
+  font-size: 24px;
 }

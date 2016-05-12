@@ -9,7 +9,7 @@ var wordLength = word.length;
 
 var guesses = 10;
 
-var start = document.getElementById('blankWord').innerHTML = "_".repeat(word.length);
+var start = document.getElementById('blankWord').innerHTML = "_".repeat(word.length) + " ";
 
 var arrWord = word.split("");
 
@@ -20,9 +20,10 @@ var lettersGuessed = [];
 var wins = 0;
 var losses = 0;
 
-//track has 12 seconds of
 var music = new Audio('assets/music/power_of_love.mp3');
 music.play();
+
+var photo = document.getElementById("photo");
 
 
 //reset function to manage game state.
@@ -64,7 +65,8 @@ document.onkeyup = function(event) {
       if(userInput == 7){
         console.log(word);
       }
-      var photo = document.getElementById("photo");
+
+    //fade photo out after each guess  
     if(guesses === 10){
       photo.style.opacity = "1.0";
     }else if (guesses === 9) {
@@ -89,8 +91,9 @@ document.onkeyup = function(event) {
       photo.style.opacity = "0.0";
       losses ++;
       reset();
-
     }
+
+
     //check if user has won the game
     if(output.includes("_") == false){
       wins ++;
